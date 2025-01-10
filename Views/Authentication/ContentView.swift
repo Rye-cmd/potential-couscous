@@ -15,7 +15,7 @@ struct ContentView: View {
                         }
                     }
                 } else if let user = appState.currentUser {
-                    TalentDashboardView(user: user)
+                    WorkspaceSettingsView(user: user)
                 } else {
                     ProgressView("Loading user data...")
                 }

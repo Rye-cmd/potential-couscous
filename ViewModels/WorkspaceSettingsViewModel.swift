@@ -3,7 +3,7 @@ import FirebaseFirestore
 import FirebaseStorage
 
 @MainActor
-class TalentDashboardViewModel: ObservableObject {
+class WorkspaceSettingsViewModel: ObservableObject {
     @Published var workspace: Models.Workspace?
     @Published var isUploadingImage = false
     @Published var profileImage: UIImage?
