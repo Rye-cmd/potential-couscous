@@ -20,7 +20,6 @@
 		4D24CC042D25771A009EF67E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CBFE2D25771A009EF67E /* OnboardingView.swift */; };
 		4D24CC072D25771A009EF67E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CBF52D25771A009EF67E /* ContentView.swift */; };
 		4D24CC092D25771A009EF67E /* CoreSetupDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CBFD2D25771A009EF67E /* CoreSetupDetailsView.swift */; };
-		4D24CC0A2D25771A009EF67E /* TeamSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CBFF2D25771A009EF67E /* TeamSetupView.swift */; };
 		4D24CC0B2D25771A009EF67E /* TalentDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CBFB2D25771A009EF67E /* TalentDashboardView.swift */; };
 		4D24CC132D257769009EF67E /* TalentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC112D257769009EF67E /* TalentApp.swift */; };
 		4D24CC222D2597CB009EF67E /* TalentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC142D257773009EF67E /* TalentTests.swift */; };
@@ -30,6 +29,10 @@
 		4D24CC2A2D25B8FD009EF67E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4D24CC292D25B8FD009EF67E /* FirebaseAuth */; };
 		4D24CC2C2D25B8FD009EF67E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4D24CC2B2D25B8FD009EF67E /* FirebaseFirestore */; };
 		4D24CC2E2D25B8FD009EF67E /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4D24CC2D2D25B8FD009EF67E /* FirebaseFirestoreSwift */; };
+		4D8674FC2D31357600EFDB23 /* BasicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8674F82D31357600EFDB23 /* BasicInfoView.swift */; };
+		4D8674FD2D31357600EFDB23 /* AccountTypeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8674F72D31357600EFDB23 /* AccountTypeSelectionView.swift */; };
+		4D8674FE2D31357600EFDB23 /* TeamSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8674F92D31357600EFDB23 /* TeamSetupView.swift */; };
+		4D8674FF2D31357600EFDB23 /* WorkspaceSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8674FA2D31357600EFDB23 /* WorkspaceSetupView.swift */; };
 		4D9DCCA72D25E4E400DB603B /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC212D257E9E009EF67E /* Workspace.swift */; };
 		4D9DCCA82D25E4EA00DB603B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC1E2D257BD7009EF67E /* User.swift */; };
 		4D9DCCA92D25E50000DB603B /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC1F2D257BF6009EF67E /* FirebaseAuthService.swift */; };
@@ -49,7 +52,6 @@
 		4DB2DE7B2D2C902E0016B41D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2DE7A2D2C902E0016B41D /* Models.swift */; };
 		4DB2DE7C2D2C999E0016B41D /* AdminSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE98F12D29473B001D692B /* AdminSetupView.swift */; };
 		4DEE98DC2D26C9CC001D692B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE98DB2D26C9CC001D692B /* AppDelegate.swift */; };
-		4DEE98E42D27FF8D001D692B /* WorkspaceSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE98E32D27FF8D001D692B /* WorkspaceSetupView.swift */; };
 		4DEE98EC2D289826001D692B /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE98EB2D289826001D692B /* FirebaseService.swift */; };
 		4DEE98EF2D294708001D692B /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE98EE2D294708001D692B /* OnboardingData.swift */; };
 		4DEE98F02D294708001D692B /* Industry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE98ED2D294708001D692B /* Industry.swift */; };
@@ -82,7 +84,6 @@
 		4D24CBFB2D25771A009EF67E /* TalentDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalentDashboardView.swift; sourceTree = "<group>"; };
 		4D24CBFD2D25771A009EF67E /* CoreSetupDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSetupDetailsView.swift; sourceTree = "<group>"; };
 		4D24CBFE2D25771A009EF67E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		4D24CBFF2D25771A009EF67E /* TeamSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSetupView.swift; sourceTree = "<group>"; };
 		4D24CC112D257769009EF67E /* TalentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalentApp.swift; sourceTree = "<group>"; };
 		4D24CC142D257773009EF67E /* TalentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalentTests.swift; sourceTree = "<group>"; };
 		4D24CC162D257773009EF67E /* TalentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalentUITests.swift; sourceTree = "<group>"; };
@@ -90,6 +91,10 @@
 		4D24CC1E2D257BD7009EF67E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D24CC1F2D257BF6009EF67E /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		4D24CC212D257E9E009EF67E /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
+		4D8674F72D31357600EFDB23 /* AccountTypeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTypeSelectionView.swift; sourceTree = "<group>"; };
+		4D8674F82D31357600EFDB23 /* BasicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoView.swift; sourceTree = "<group>"; };
+		4D8674F92D31357600EFDB23 /* TeamSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSetupView.swift; sourceTree = "<group>"; };
+		4D8674FA2D31357600EFDB23 /* WorkspaceSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSetupView.swift; sourceTree = "<group>"; };
 		4D9DCC9F2D25E25800DB603B /* Talent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D9DCCA02D25E25800DB603B /* TalentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D9DCCA12D25E25800DB603B /* TalentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,7 +110,6 @@
 		4DB2DE782D2C5CAF0016B41D /* AddTalentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTalentView.swift; sourceTree = "<group>"; };
 		4DB2DE7A2D2C902E0016B41D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		4DEE98DB2D26C9CC001D692B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4DEE98E32D27FF8D001D692B /* WorkspaceSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSetupView.swift; sourceTree = "<group>"; };
 		4DEE98EB2D289826001D692B /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		4DEE98ED2D294708001D692B /* Industry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Industry.swift; sourceTree = "<group>"; };
 		4DEE98EE2D294708001D692B /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
@@ -203,8 +207,7 @@
 				4DEE98F22D29473B001D692B /* OnboardingCoordinator.swift */,
 				4D24CBFD2D25771A009EF67E /* CoreSetupDetailsView.swift */,
 				4D24CBFE2D25771A009EF67E /* OnboardingView.swift */,
-				4DEE98E32D27FF8D001D692B /* WorkspaceSetupView.swift */,
-				4D24CBFF2D25771A009EF67E /* TeamSetupView.swift */,
+				4D8674FB2D31357600EFDB23 /* Steps */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -294,6 +297,17 @@
 				4D127B202D26779B0087A570 /* AppState.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4D8674FB2D31357600EFDB23 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				4D8674F72D31357600EFDB23 /* AccountTypeSelectionView.swift */,
+				4D8674F82D31357600EFDB23 /* BasicInfoView.swift */,
+				4D8674F92D31357600EFDB23 /* TeamSetupView.swift */,
+				4D8674FA2D31357600EFDB23 /* WorkspaceSetupView.swift */,
+			);
+			path = Steps;
 			sourceTree = "<group>";
 		};
 		4DAC81C62D2AC54B00ABCA84 /* Components */ = {
@@ -485,9 +499,12 @@
 				4D24CC072D25771A009EF67E /* ContentView.swift in Sources */,
 				4D24CC092D25771A009EF67E /* CoreSetupDetailsView.swift in Sources */,
 				4D9DCCA72D25E4E400DB603B /* Workspace.swift in Sources */,
+				4D8674FC2D31357600EFDB23 /* BasicInfoView.swift in Sources */,
+				4D8674FD2D31357600EFDB23 /* AccountTypeSelectionView.swift in Sources */,
+				4D8674FE2D31357600EFDB23 /* TeamSetupView.swift in Sources */,
+				4D8674FF2D31357600EFDB23 /* WorkspaceSetupView.swift in Sources */,
 				4DEE98EF2D294708001D692B /* OnboardingData.swift in Sources */,
 				4DEE98F02D294708001D692B /* Industry.swift in Sources */,
-				4D24CC0A2D25771A009EF67E /* TeamSetupView.swift in Sources */,
 				4DB2DE702D2C49670016B41D /* TalentService.swift in Sources */,
 				4DAC81C92D2AE59200ABCA84 /* ImagePicker.swift in Sources */,
 				4DB2DE742D2C4A9B0016B41D /* TalentViewModel.swift in Sources */,
@@ -497,7 +514,6 @@
 				4D9DCCA82D25E4EA00DB603B /* User.swift in Sources */,
 				4DEE98F42D29473B001D692B /* OnboardingCoordinator.swift in Sources */,
 				4DAC81CB2D2AE5B800ABCA84 /* TalentDashboardViewModel.swift in Sources */,
-				4DEE98E42D27FF8D001D692B /* WorkspaceSetupView.swift in Sources */,
 				4DAC81CF2D2B0C3C00ABCA84 /* ImageService.swift in Sources */,
 				4D24CC0B2D25771A009EF67E /* TalentDashboardView.swift in Sources */,
 			);

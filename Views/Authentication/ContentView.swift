@@ -9,7 +9,7 @@ struct ContentView: View {
                 if !appState.isAuthenticated {
                     LoginView()
                 } else if appState.isOnboarding {
-                    OnboardingView {
+                    OnboardingCoordinator {
                         Task {
                             await appState.completeOnboarding()
                         }

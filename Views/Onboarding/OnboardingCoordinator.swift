@@ -1,64 +1,130 @@
 import SwiftUI
 import FirebaseFirestore
+import FirebaseAuth
 
-enum OnboardingStep {
-    case adminSetup
+enum OnboardingStep: CaseIterable {
+    case accountType
+    case basicInfo
     case workspaceSetup
+    case teamSetup
+    
+    var id: Self { self }
 }
 
 struct OnboardingCoordinator: View {
-    @State private var currentStep: OnboardingStep = .adminSetup
-    @State private var onboardingData = Models.OnboardingData()
+    @StateObject private var viewModel = OnboardingViewModel()
     @EnvironmentObject var appState: AppState
     let onComplete: () -> Void
     
+    init(onComplete: @escaping () -> Void) {
+        self.onComplete = onComplete
+        // Ensure we start at the first step
+        _viewModel = StateObject(wrappedValue: OnboardingViewModel(initialStep: .accountType))
+    }
+    
     var body: some View {
-        switch currentStep {
-        case .adminSetup:
-            AdminSetupView(
-                data: $onboardingData,
-                onNext: { currentStep = .workspaceSetup }
-            )
+        VStack {
+            // Progress indicator (except for first step)
+            if viewModel.currentStep != .accountType {
+                ProgressView(
+                    value: Double(viewModel.currentStepIndex + 1),
+                    total: Double(viewModel.totalSteps)
+                )
+                .padding()
+            }
             
-        case .workspaceSetup:
-            WorkspaceSetupView(data: $onboardingData) {
-                Task {
-                    do {
-                        if let user = appState.currentUser {
-                            try await saveOnboardingData(user: user)
+            // Current step view
+            switch viewModel.currentStep {
+            case .accountType:
+                AccountTypeSelectionView(
+                    selectedType: $viewModel.onboardingData.accountType,
+                    onNext: { viewModel.moveToNextStep() }
+                )
+                
+            case .basicInfo:
+                BasicInfoView(
+                    personalInfo: $viewModel.onboardingData.personalInfo,
+                    onNext: { viewModel.moveToNextStep() }
+                )
+                
+            case .workspaceSetup:
+                WorkspaceSetupView(
+                    data: $viewModel.onboardingData,
+                    onComplete: { 
+                        Task {
+                            await viewModel.completeOnboarding()
                             onComplete()
                         }
-                    } catch {
-                        print("Error during onboarding: \(error)")
                     }
-                }
+                )
+                
+            case .teamSetup:
+                TeamSetupView(
+                    teamInvites: $viewModel.onboardingData.teamInvites,
+                    onComplete: {
+                        Task {
+                            await viewModel.completeOnboarding()
+                            onComplete()
+                        }
+                    }
+                )
+            }
+        }
+        .alert("Error", isPresented: $viewModel.showError) {
+            Button("OK") { viewModel.errorMessage = nil }
+        } message: {
+            if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
             }
         }
     }
+}
+
+// ViewModel to handle onboarding logic
+@MainActor
+final class OnboardingViewModel: ObservableObject {
+    @Published var onboardingData = Models.OnboardingData()
+    @Published var currentStep: OnboardingStep
+    @Published var showError = false
+    @Published var errorMessage: String?
     
-    private func saveOnboardingData(user: User) async throws {
-        let db = Firestore.firestore()
+    private let talentService = TalentService.shared
+    
+    init(initialStep: OnboardingStep = .accountType) {
+        self.currentStep = initialStep
+    }
+    
+    var currentStepIndex: Int {
+        availableSteps.firstIndex(of: currentStep) ?? 0
+    }
+    
+    var totalSteps: Int {
+        availableSteps.count
+    }
+    
+    private var availableSteps: [OnboardingStep] {
+        OnboardingStep.allCases.filter { step in
+            if case .teamSetup = step {
+                return onboardingData.accountType == .team
+            }
+            return true
+        }
+    }
+    
+    func moveToNextStep() {
+        guard let currentIndex = availableSteps.firstIndex(of: currentStep),
+              currentIndex < availableSteps.count - 1 else { return }
         
-        // Convert industries to array of strings for Firestore
-        let industryStrings = Array(onboardingData.selectedIndustries).map { $0.rawValue }
-        
-        // Update workspace with all relevant data
-        try await db.collection("workspaces").document(user.workspaceId).setData([
-            "workspaceName": onboardingData.workspaceName,
-            "industries": industryStrings,
-            "location": onboardingData.location,
-            "ownerId": user.id,
-            "createdAt": FieldValue.serverTimestamp(),
-            "updatedAt": FieldValue.serverTimestamp()
-        ], merge: true)
-        
-        // Update user with all relevant data
-        try await db.collection("users").document(user.id).setData([
-            "name": onboardingData.adminName,
-            "role": "admin",
-            "isOnboarding": false,
-            "updatedAt": FieldValue.serverTimestamp()
-        ], merge: true)
+        currentStep = availableSteps[currentIndex + 1]
+    }
+    
+    func completeOnboarding() async {
+        do {
+            try await talentService.completeOnboarding(onboardingData)
+        } catch {
+            errorMessage = error.localizedDescription
+            showError = true
+        }
     }
 }
 
