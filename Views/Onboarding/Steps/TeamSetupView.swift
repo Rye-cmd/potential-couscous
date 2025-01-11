@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct TeamSetupView: View {
-    @Binding var teamInvites: [Models.OnboardingData.TeamInvite]
+    @Binding var teamInvites: [Models.TeamInvite]
     let onComplete: () -> Void
     
-    @State private var newInvite = Models.OnboardingData.TeamInvite(
+    @State private var newInvite = Models.TeamInvite(
         email: "",
         role: "",
         status: .pending
@@ -39,26 +39,22 @@ struct TeamSetupView: View {
                     .foregroundColor(.secondary)
             }
             
-            // Invite Form
+            // Form content
             VStack(alignment: .leading, spacing: 20) {
                 // New Invite Section
                 VStack(alignment: .leading, spacing: 12) {
-                    // Email Input
-                    VStack(alignment: .leading, spacing: 4) {
-                        TextField("Email address", text: $newInvite.email)
-                            .textFieldStyle(.roundedBorder)
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.emailAddress)
-                            .autocorrectionDisabled()
-                        
-                        if showEmailError {
-                            Text("Please enter a valid email")
-                                .font(.caption)
-                                .foregroundColor(.red)
-                        }
+                    TextField("Email address", text: $newInvite.email)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.never)
+                        .keyboardType(.emailAddress)
+                        .autocorrectionDisabled()
+                    
+                    if showEmailError {
+                        Text("Please enter a valid email")
+                            .font(.caption)
+                            .foregroundColor(.red)
                     }
                     
-                    // Role Selection
                     Menu {
                         ForEach(roles, id: \.self) { role in
                             Button(role) {
@@ -80,7 +76,6 @@ struct TeamSetupView: View {
                         )
                     }
                     
-                    // Add Button
                     Button(action: addInvite) {
                         HStack {
                             Image(systemName: "plus.circle.fill")
@@ -124,7 +119,6 @@ struct TeamSetupView: View {
                     }
                 }
             }
-            .padding(.vertical)
             
             Spacer()
             
@@ -146,7 +140,6 @@ struct TeamSetupView: View {
                     }
                 }
             }
-            .padding(.horizontal)
         }
         .padding()
     }
@@ -159,7 +152,7 @@ struct TeamSetupView: View {
         
         showEmailError = false
         teamInvites.append(newInvite)
-        newInvite = Models.OnboardingData.TeamInvite(
+        newInvite = Models.TeamInvite(
             email: "",
             role: "",
             status: .pending

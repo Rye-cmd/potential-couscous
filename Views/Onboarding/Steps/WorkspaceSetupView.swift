@@ -70,12 +70,13 @@ struct WorkspaceSetupView: View {
             
             // Continue Button
             Button("Continue") {
-                // Validate inputs if needed
-                if !data.workspaceInfo.name.isEmpty {
-                    onComplete()  // Call the completion handler
+                if isFormValid {
+                    data.workspaceInfo.type = data.accountType
+                    onComplete()
                 }
             }
             .buttonStyle(.borderedProminent)
+            .disabled(!isFormValid)
             .frame(maxWidth: .infinity)
             .padding()
         }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AccountTypeSelectionView: View {
-    @Binding var selectedType: Models.OnboardingData.AccountType
+    @Binding var selectedType: Models.AccountType
     let onNext: () -> Void
     
     var body: some View {
@@ -33,9 +33,9 @@ struct AccountTypeSelectionView: View {
                 AccountTypeCard(
                     title: "For Myself",
                     description: "Work on your own for now—you can invite collaborators later",
-                    isSelected: selectedType == .solo,
+                    isSelected: selectedType == .individual,
                     action: {
-                        selectedType = .solo
+                        selectedType = .individual
                     }
                 )
             }
@@ -95,7 +95,7 @@ private struct AccountTypeCard: View {
 
 #Preview {
     AccountTypeSelectionView(
-        selectedType: .constant(.solo),
+        selectedType: .constant(.individual),
         onNext: {}
     )
     .environmentObject(AppState())

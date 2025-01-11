@@ -32,6 +32,8 @@
 		4D8674FF2D31357600EFDB23 /* WorkspaceSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8674FA2D31357600EFDB23 /* WorkspaceSetupView.swift */; };
 		4D8675032D318D3900EFDB23 /* WorkspaceSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8675022D318D3900EFDB23 /* WorkspaceSettingsViewModel.swift */; };
 		4D8675052D318D6200EFDB23 /* WorkspaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8675042D318D6200EFDB23 /* WorkspaceSettingsView.swift */; };
+		4D8675072D31923700EFDB23 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8675062D31923700EFDB23 /* DashboardView.swift */; };
+		4D8675092D31A02200EFDB23 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8675082D31A02200EFDB23 /* AccountType.swift */; };
 		4D9DCCA72D25E4E400DB603B /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC212D257E9E009EF67E /* Workspace.swift */; };
 		4D9DCCA82D25E4EA00DB603B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC1E2D257BD7009EF67E /* User.swift */; };
 		4D9DCCA92D25E50000DB603B /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D24CC1F2D257BF6009EF67E /* FirebaseAuthService.swift */; };
@@ -91,6 +93,8 @@
 		4D8674FA2D31357600EFDB23 /* WorkspaceSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSetupView.swift; sourceTree = "<group>"; };
 		4D8675022D318D3900EFDB23 /* WorkspaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingsViewModel.swift; sourceTree = "<group>"; };
 		4D8675042D318D6200EFDB23 /* WorkspaceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingsView.swift; sourceTree = "<group>"; };
+		4D8675062D31923700EFDB23 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		4D8675082D31A02200EFDB23 /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
 		4D9DCC9F2D25E25800DB603B /* Talent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D9DCCA02D25E25800DB603B /* TalentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D9DCCA12D25E25800DB603B /* TalentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +192,7 @@
 		4D24CBFC2D25771A009EF67E /* Dashboards */ = {
 			isa = PBXGroup;
 			children = (
+				4D8675062D31923700EFDB23 /* DashboardView.swift */,
 				4D8675042D318D6200EFDB23 /* WorkspaceSettingsView.swift */,
 			);
 			path = Dashboards;
@@ -217,6 +222,7 @@
 		4D24CC0E2D25773E009EF67E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4D8675082D31A02200EFDB23 /* AccountType.swift */,
 				4D24CC212D257E9E009EF67E /* Workspace.swift */,
 				4D24CC1E2D257BD7009EF67E /* User.swift */,
 				4DEE98ED2D294708001D692B /* Industry.swift */,
@@ -482,6 +488,7 @@
 				4D24CC132D257769009EF67E /* TalentApp.swift in Sources */,
 				4DB2DE792D2C5CAF0016B41D /* AddTalentView.swift in Sources */,
 				4D9DCCA92D25E50000DB603B /* FirebaseAuthService.swift in Sources */,
+				4D8675072D31923700EFDB23 /* DashboardView.swift in Sources */,
 				4DB2DE6E2D2C48BB0016B41D /* Talent.swift in Sources */,
 				4DB2DE7B2D2C902E0016B41D /* Models.swift in Sources */,
 				4DB2DE772D2C4B270016B41D /* TalentListView.swift in Sources */,
@@ -494,6 +501,7 @@
 				4D8674FF2D31357600EFDB23 /* WorkspaceSetupView.swift in Sources */,
 				4DEE98EF2D294708001D692B /* OnboardingData.swift in Sources */,
 				4DEE98F02D294708001D692B /* Industry.swift in Sources */,
+				4D8675092D31A02200EFDB23 /* AccountType.swift in Sources */,
 				4DB2DE702D2C49670016B41D /* TalentService.swift in Sources */,
 				4DAC81C92D2AE59200ABCA84 /* ImagePicker.swift in Sources */,
 				4DB2DE742D2C4A9B0016B41D /* TalentViewModel.swift in Sources */,

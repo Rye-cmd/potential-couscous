@@ -27,7 +27,7 @@ struct WorkspaceSettingsView: View {
                     )
                     
                     VStack(alignment: .leading) {
-                        Text("Welcome \(user.name.isEmpty ? "Admin" : user.name)")
+                        Text(user.name.isEmpty ? "Admin" : user.name)
                             .font(.headline)
                         Text("Email: \(user.email)")
                             .foregroundColor(.secondary)
@@ -75,27 +75,6 @@ struct WorkspaceSettingsView: View {
                 }
             }
             
-            // Admin Controls Section
-            Section("ADMIN CONTROLS") {
-                NavigationLink {
-                    // Workspace Settings View
-                    Text("Workspace Settings")
-                } label: {
-                    Text("Workspace Settings")
-                }
-                
-                NavigationLink {
-                    TalentListView(workspaceId: user.workspaceId)
-                } label: {
-                    HStack {
-                        Image(systemName: "person.2")
-                        Text("Manage Talents")
-                    }
-                }
-                
-                Text("Admin Dashboard")
-            }
-            
             // Sign Out Section
             Section {
                 Button("Sign Out", role: .destructive) {
@@ -105,7 +84,8 @@ struct WorkspaceSettingsView: View {
                 }
             }
         }
-        .navigationTitle("Dashboard")
+        .navigationTitle("Settings")
+        .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(selectedImage: $selectedImage)
         }

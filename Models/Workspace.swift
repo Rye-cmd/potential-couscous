@@ -7,6 +7,7 @@ extension Models {
         public let industries: [Models.Industry]
         public let location: String
         public let ownerId: String
+        public let type: Models.AccountType
         public let createdAt: Date?
         public let updatedAt: Date?
         
@@ -20,6 +21,7 @@ extension Models {
             industries: [Models.Industry],
             location: String,
             ownerId: String,
+            type: Models.AccountType,
             createdAt: Date?,
             updatedAt: Date?
         ) {
@@ -28,6 +30,7 @@ extension Models {
             self.industries = industries
             self.location = location
             self.ownerId = ownerId
+            self.type = type
             self.createdAt = createdAt
             self.updatedAt = updatedAt
         }
@@ -42,6 +45,7 @@ extension Models.Workspace {
             industries: [Models.Industry.modeling],
             location: "United States",
             ownerId: "mock-owner-id",
+            type: .individual,
             createdAt: Date(),
             updatedAt: Date()
         )

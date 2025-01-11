@@ -18,13 +18,11 @@ struct OnboardingCoordinator: View {
     
     init(onComplete: @escaping () -> Void) {
         self.onComplete = onComplete
-        // Ensure we start at the first step
         _viewModel = StateObject(wrappedValue: OnboardingViewModel(initialStep: .accountType))
     }
     
     var body: some View {
         VStack {
-            // Progress indicator (except for first step)
             if viewModel.currentStep != .accountType {
                 ProgressView(
                     value: Double(viewModel.currentStepIndex + 1),
@@ -33,7 +31,6 @@ struct OnboardingCoordinator: View {
                 .padding()
             }
             
-            // Current step view
             switch viewModel.currentStep {
             case .accountType:
                 AccountTypeSelectionView(
@@ -80,7 +77,6 @@ struct OnboardingCoordinator: View {
     }
 }
 
-// ViewModel to handle onboarding logic
 @MainActor
 final class OnboardingViewModel: ObservableObject {
     @Published var onboardingData = Models.OnboardingData()

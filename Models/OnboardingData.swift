@@ -2,124 +2,60 @@ import Foundation
 import FirebaseFirestore
 
 extension Models {
-    public struct OnboardingData {
-        // Main properties
-        public var accountType: AccountType = .solo
-        public var personalInfo: PersonalInfo = .init()
-        public var workspaceInfo: WorkspaceInfo = .init()
-        public var teamInvites: [TeamInvite] = []
+    struct OnboardingData: Codable {
+        var accountType: AccountType = .individual
+        var personalInfo = PersonalInfo()
+        var workspaceInfo = WorkspaceInfo()
+        var teamInvites: [TeamInvite] = []
         
-        // Personal Info structure
-        public struct PersonalInfo {
-            public var fullName: String = ""
-            public var role: String = ""
-            
-            public var isComplete: Bool {
-                !fullName.isEmpty && !role.isEmpty
-            }
+        // Nested types need to be moved outside for proper Codable conformance
+        enum CodingKeys: String, CodingKey {
+            case accountType
+            case personalInfo
+            case workspaceInfo
+            case teamInvites
         }
+    }
+    
+    struct TeamInvite: Codable, Identifiable {
+        var id = UUID()
+        var email: String
+        var role: String
+        var status: InviteStatus
         
-        // Workspace Info structure
-        public struct WorkspaceInfo {
-            public var name: String = ""
-            public var industries: Set<Models.Industry> = []
-            public var location: String = ""
-            
-            public var isComplete: Bool {
-                !name.isEmpty && !industries.isEmpty
-            }
+        enum InviteStatus: String, Codable {
+            case pending
+            case accepted
+            case declined
         }
+    }
+}
+
+// Move nested types outside
+extension Models {
+    struct PersonalInfo: Codable {
+        var name: String = ""
+        var email: String = ""
+        var phone: String = ""
         
-        // Team Invite structure
-        public struct TeamInvite {
-            public var email: String
-            public var role: String
-            public var status: InviteStatus = .pending
-            
-            public enum InviteStatus: String, Codable {
-                case pending
-                case sent
-                case accepted
-                case declined
-            }
+        enum CodingKeys: String, CodingKey {
+            case name
+            case email
+            case phone
         }
+    }
+    
+    struct WorkspaceInfo: Codable {
+        var name: String = ""
+        var industries: Set<Industry> = []
+        var location: String = ""
+        var type: Models.AccountType = .individual
         
-        // Account Type enum
-        public enum AccountType: String, Codable {
-            case solo
-            case team
-            
-            var description: String {
-                switch self {
-                case .solo:
-                    return "Work on your own for now—you can invite collaborators later"
-                case .team:
-                    return "Set up your workspace and invite your team"
-                }
-            }
-        }
-        
-        // Helper methods
-        public var isComplete: Bool {
-            personalInfo.isComplete &&
-            workspaceInfo.isComplete &&
-            (accountType == .solo || !teamInvites.isEmpty)
-        }
-        
-        // Firebase conversion helpers
-        public func toFirestore() -> [String: Any] {
-            let timestamp = Timestamp()
-            return [
-                "accountType": accountType.rawValue,
-                "name": personalInfo.fullName,
-                "role": personalInfo.role,
-                "workspaceName": workspaceInfo.name,
-                "industries": Array(workspaceInfo.industries).map(\.rawValue),
-                "isOnboarding": false,
-                "updatedAt": timestamp
-            ]
-        }
-        
-        public func workspaceData() -> [String: Any] {
-            let timestamp = Timestamp()
-            return [
-                "name": workspaceInfo.name,
-                "industries": Array(workspaceInfo.industries).map(\.rawValue),
-                "type": accountType.rawValue,
-                "createdAt": timestamp,
-                "updatedAt": timestamp
-            ]
-        }
-        
-        public func inviteData(_ invite: TeamInvite) -> [String: Any] {
-            let timestamp = Timestamp()
-            return [
-                "email": invite.email,
-                "role": invite.role,
-                "status": invite.status.rawValue,
-                "createdAt": timestamp
-            ]
-        }
-        
-        // Computed properties for AdminSetupView
-        public var adminName: String {
-            get { personalInfo.fullName }
-            set { personalInfo.fullName = newValue }
-        }
-        
-        public var workspaceName: String {
-            get { workspaceInfo.name }
-            set { workspaceInfo.name = newValue }
-        }
-        
-        public var selectedIndustries: Set<Models.Industry> {
-            get { workspaceInfo.industries }
-            set { workspaceInfo.industries = newValue }
-        }
-        
-        public var location: String {
-            get { workspaceInfo.location }
-            set { workspaceInfo.location = newValue }
+        enum CodingKeys: String, CodingKey {
+            case name
+            case industries
+            case location
+            case type
         }
     }
 }

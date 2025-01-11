@@ -95,12 +95,16 @@ class WorkspaceSettingsViewModel: ObservableObject {
                 Models.Industry.allCases.first { $0.rawValue == industryString }
             }
             
+            let typeString = data["type"] as? String ?? "individual"
+            let type = Models.AccountType(rawValue: typeString) ?? .individual
+            
             self.workspace = Models.Workspace(
                 id: doc.documentID,
                 workspaceName: data["workspaceName"] as? String ?? "",
                 industries: industries.isEmpty ? [.modeling] : industries,
                 location: data["location"] as? String ?? "",
                 ownerId: data["ownerId"] as? String ?? "",
+                type: type,
                 createdAt: (data["createdAt"] as? Timestamp)?.dateValue(),
                 updatedAt: (data["updatedAt"] as? Timestamp)?.dateValue()
             )

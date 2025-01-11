@@ -10,16 +10,8 @@ struct TalentListView: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.talents) { talent in
-                VStack(alignment: .leading) {
-                    Text(talent.name)
-                        .font(.headline)
-                    Text(talent.email)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    Text("Rate: $\(String(format: "%.2f", talent.rate))/hr")
-                        .font(.caption)
-                }
+            ForEach(viewModel.talents.sorted { $0.createdAt ?? Date() > $1.createdAt ?? Date() }) { talent in
+                TalentRowView(talent: talent)
             }
         }
         .navigationTitle("Talents")
@@ -33,8 +25,29 @@ struct TalentListView: View {
         .sheet(isPresented: $showAddTalent) {
             AddTalentView(viewModel: viewModel)
         }
+        .refreshable {
+            await viewModel.fetchTalents()
+        }
         .task {
             await viewModel.fetchTalents()
         }
+    }
+}
+
+// Separate view for talent row
+struct TalentRowView: View {
+    let talent: Models.Talent
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(talent.name)
+                .font(.headline)
+            Text(talent.email)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            Text("Rate: $\(String(format: "%.2f", talent.rate))/hr")
+                .font(.caption)
+        }
+        .padding(.vertical, 4)
     }
 } 

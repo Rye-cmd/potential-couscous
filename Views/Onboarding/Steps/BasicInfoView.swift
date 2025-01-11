@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BasicInfoView: View {
-    @Binding var personalInfo: Models.OnboardingData.PersonalInfo
+    @Binding var personalInfo: Models.PersonalInfo
     let onNext: () -> Void
     
     // Professional roles available
@@ -17,7 +17,7 @@ struct BasicInfoView: View {
     ]
     
     private var isFormValid: Bool {
-        !personalInfo.fullName.isEmpty && !personalInfo.role.isEmpty
+        !personalInfo.name.isEmpty && !personalInfo.email.isEmpty
     }
     
     var body: some View {
@@ -40,9 +40,21 @@ struct BasicInfoView: View {
                     Text("Full Name")
                         .font(.headline)
                     
-                    TextField("Enter your full name", text: $personalInfo.fullName)
+                    TextField("Enter your full name", text: $personalInfo.name)
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.words)
+                }
+                
+                // Email Field
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Email")
+                        .font(.headline)
+                    
+                    TextField("Enter your email", text: $personalInfo.email)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.never)
+                        .keyboardType(.emailAddress)
+                        .autocorrectionDisabled()
                 }
                 
                 // Role Selection
@@ -95,7 +107,7 @@ struct BasicInfoView: View {
 
 #Preview {
     BasicInfoView(
-        personalInfo: .constant(Models.OnboardingData.PersonalInfo()),
+        personalInfo: .constant(Models.PersonalInfo()),
         onNext: {}
     )
 } 

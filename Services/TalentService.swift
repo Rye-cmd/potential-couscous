@@ -38,59 +38,30 @@ actor TalentService {
     
     // MARK: - Onboarding
     func completeOnboarding(_ data: Models.OnboardingData) async throws {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            throw CustomFirebaseError.unauthorized
+        guard let user = Auth.auth().currentUser else {
+            throw AuthError.userNotFound
         }
         
         let workspaceRef = db.collection("workspaces").document()
-        let userRef = db.collection("users").document(userId)
-        let invitesRef = workspaceRef.collection("invites")
         
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            db.runTransaction({ (transaction, errorPointer) -> Any? in
-                do {
-                    // Create workspace
-                    transaction.setData([
-                        "name": data.workspaceInfo.name,
-                        "industries": Array(data.workspaceInfo.industries).map(\.rawValue),
-                        "type": data.accountType.rawValue,
-                        "location": data.workspaceInfo.location,
-                        "createdAt": FieldValue.serverTimestamp(),
-                        "updatedAt": FieldValue.serverTimestamp()
-                    ], forDocument: workspaceRef)
-                    
-                    // Update user profile
-                    transaction.setData([
-                        "name": data.personalInfo.fullName,
-                        "role": data.personalInfo.role,
-                        "workspaceId": workspaceRef.documentID,
-                        "isOnboarding": false,
-                        "updatedAt": FieldValue.serverTimestamp()
-                    ], forDocument: userRef, merge: true)
-                    
-                    // Create team invites if any
-                    for invite in data.teamInvites {
-                        let inviteDoc = invitesRef.document()
-                        transaction.setData([
-                            "email": invite.email,
-                            "role": invite.role,
-                            "status": invite.status.rawValue,
-                            "createdAt": FieldValue.serverTimestamp()
-                        ], forDocument: inviteDoc)
-                    }
-                    return nil
-                } catch {
-                    errorPointer?.pointee = error as NSError
-                    return nil
-                }
-            }) { object, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else {
-                    continuation.resume(returning: ())
-                }
-            }
-        }
+        let workspace = Models.Workspace(
+            id: workspaceRef.documentID,
+            workspaceName: data.workspaceInfo.name,
+            industries: Array(data.workspaceInfo.industries),
+            location: data.workspaceInfo.location,
+            ownerId: user.uid,
+            type: data.accountType,
+            createdAt: Date(),
+            updatedAt: Date()
+        )
+        
+        try await workspaceRef.setData(from: workspace)
+        
+        try await db.collection("users").document(user.uid).updateData([
+            "workspaceId": workspaceRef.documentID,
+            "accountType": data.accountType.rawValue,
+            "updatedAt": FieldValue.serverTimestamp()
+        ])
     }
     
     // MARK: - Basic CRUD Operations
